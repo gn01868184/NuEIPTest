@@ -1,23 +1,27 @@
 package nueip.java.winnie;
 
 import java.util.Arrays;
+import java.util.Hashtable;
 
 public class TwoSum {
 	public static void main(String[] args) {
 		int[] nums = { 3, 3 };
 		int target = 6;
-		System.out.println(Arrays.toString(towSum(nums, target)));
+		System.out.println(Arrays.toString(twoSum(nums, target)));
 	}
 
-	public static int[] towSum(int[] nums, int target) {
+	public static int[] twoSum(int[] nums, int target) {
 		int[] output = new int[2];
-		for (int i = 0; i < nums.length - 1; i++) {
-			for (int j = i + 1; j < nums.length; j++) {
-				if ((nums[i] + nums[j]) == target) {
-					output[0] = i;
-					output[1] = j;
-					return output;
-				}
+		Hashtable<Integer, Integer> hash = new Hashtable<Integer, Integer>();
+		for (int i = 0; i < nums.length; i++) {
+			hash.put(nums[i], i);
+		}
+
+		for (int i = 0; i < nums.length; i++) {
+			if (hash.containsKey(target - nums[i])) {
+				output[0] = i;
+				output[1] = hash.get(target - nums[i]);
+				break;
 			}
 		}
 		return output;
